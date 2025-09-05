@@ -3,9 +3,10 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mountRoutes from './routes/index.js';
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
+const API_URL = process.env.API_BASE_URL || 'http://localhost:3000';
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -25,4 +26,4 @@ app.use((_, res, next) => {
 
 mountRoutes(app);
 
-app.listen(port, () => console.log(`Server listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`Server listening at ${API_URL}`));

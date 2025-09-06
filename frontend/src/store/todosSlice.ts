@@ -12,12 +12,15 @@ export type Todo = {
 export const todosApi = createApi({
     reducerPath: 'todosApi',
     baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+    tagTypes: ['Todos'],
     endpoints: (builder) => ({
         fetchTodos: builder.query<Todo[], void>({
             query: () => '/api/todos/',
+            providesTags: ['Todos'],
         }),
         fetchTodo: builder.query<Todo, string>({
             query: (id) => `/api/todos/${id}`,
+            providesTags: ['Todos'],
         }),
         createTodo: builder.mutation({
             query: (newTodo) => ({
@@ -25,6 +28,7 @@ export const todosApi = createApi({
                 method: 'POST',
                 body: newTodo,
             }),
+            invalidatesTags: ['Todos'],
         }),
         updateTodo: builder.mutation({
             query: (updatedTodo) => ({
@@ -32,12 +36,14 @@ export const todosApi = createApi({
                 method: 'PUT',
                 body: updatedTodo,
             }),
+            invalidatesTags: ['Todos'],
         }),
         deleteTodo: builder.mutation({
             query: (id) => ({
                 url: `/api/todos/${id}`,
                 method: 'DELETE',
             }),
+            invalidatesTags: ['Todos'],
         }),
     }),
 });

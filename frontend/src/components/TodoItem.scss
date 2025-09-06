@@ -1,4 +1,4 @@
-.todos-list-row {
+.todo-item {
     display: table-row;
 
     &:hover {
@@ -16,13 +16,20 @@
             color: #888;
         }
     }
-}
 
-.todos-list-cell {
-    display: table-cell;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #eee;
-    vertical-align: middle;
+    .todo-item-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
+
+    div {
+        display: table-cell;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
 }
 
 .todo-item-checkbox {
@@ -37,12 +44,6 @@
 .todo-item-description {
     margin: 0;
     color: #555;
-}
-
-.todo-item-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.5rem;
 }
 
 .todo-item-button {

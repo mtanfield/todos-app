@@ -7,20 +7,10 @@
   width: 100%;
 }
 
-.todos-list-row {
-  display: table-row;
-}
-
 .todos-list-header {
   display: table-row;
   font-weight: bold;
   background: #f8f8f8;
-}
-
-.todos-list-cell {
-  display: table-cell;
-  padding: 0.75rem 1rem;
-  vertical-align: middle;
 }
 
 .todos-list-footer {

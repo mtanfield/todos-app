@@ -24,8 +24,8 @@ const TodoItem = ({ title, description, completed, onToggleCompleted, onAction }
     };
 
     return (
-        <div className={`todo-item todos-list-row ${completed ? 'completed' : ''}`}>
-            <div className="todos-list-cell">
+        <div className={`todo-item ${completed ? 'completed' : ''}`}>
+            <div>
                 <input
                     type="checkbox"
                     className="todo-item-checkbox"
@@ -33,9 +33,9 @@ const TodoItem = ({ title, description, completed, onToggleCompleted, onAction }
                     onChange={handleCompletedChange}
                 />
             </div>
-            <div className="todos-list-cell todo-item-title">{title}</div>
-            <div className="todos-list-cell todo-item-description">{description}</div>
-            <div className="todos-list-cell todo-item-actions">
+            <div className="todo-item-title">{title}</div>
+            <div className="todo-item-description">{description}</div>
+            <div className="todo-item-actions">
                 <button className="todo-item-button" title="Edit" onClick={() => handleAction('edit')}>
                     <EditIcon />
                 </button>

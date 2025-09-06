@@ -1,0 +1,40 @@
+.todos-list {
+//   display: table;
+  width: 100%;
+//   border-collapse: collapse;
+}
+
+.todos-list-items {
+  display: table;
+  width: 100%;
+}
+
+.todos-list-row {
+  display: table-row;
+}
+
+.todos-list-header {
+  display: table-row;
+  font-weight: bold;
+  background: #f8f8f8;
+}
+
+.todos-list-cell {
+  display: table-cell;
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+}
+
+.todos-list-footer {
+    margin-top: 1rem;
+}
+
+.todos-list-add-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+}

@@ -1,21 +1,31 @@
-import './Todo.scss';
+import './TodoItem.scss';
 
 type TodoItemProps = {
     title: string;
     description: string;
     completed: boolean;
+    onToggleCompleted?: (completed: boolean) => void;
 };
 
-const TodoItem = ({ title, description, completed }: TodoItemProps) => {
+const TodoItem = ({ title, description, completed, onToggleCompleted }: TodoItemProps) => {
     const handleCompletedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(`${title} completed: ${e.target.checked}`);
-    }
+        if (onToggleCompleted) {
+            onToggleCompleted(e.target.checked);
+        }
+    };
 
     return (
-        <div className="todo-item">
-            <h3>{title}</h3>
-            <p>{description}</p>
-            <input type="checkbox" checked={completed} onChange={handleCompletedChange} />
+        <div className={`todo-item todos-list-row ${completed ? 'completed' : ''}`}>
+            <div className="todos-list-cell">
+                <input
+                    type="checkbox"
+                    className="todo-item-checkbox"
+                    checked={completed}
+                    onChange={handleCompletedChange}
+                />
+            </div>
+            <div className="todos-list-cell todo-item-title">{title}</div>
+            <div className="todos-list-cell todo-item-description">{description}</div>
         </div>
     );
 };

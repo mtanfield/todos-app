@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 export type Todo = {
-    id: string;
+    id?: string;
     title: string;
     description: string;
     completed: boolean;

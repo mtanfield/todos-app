@@ -6,6 +6,7 @@ import {
     useFetchTodosQuery,
     useCreateTodoMutation,
     useUpdateTodoMutation,
+    useDeleteTodoMutation
 } from '../store/todosSlice';
 
 import './TodosList.scss';
@@ -22,6 +23,7 @@ const TodosList = () => {
 
     const [createTodo] = useCreateTodoMutation();
     const [updateTodo] = useUpdateTodoMutation();
+    const [deleteTodo] = useDeleteTodoMutation();
 
     const handleToggleDialog = (isOpen?: boolean) => {
         setIsDialogOpen(isOpen !== undefined ? isOpen : !isDialogOpen);
@@ -54,6 +56,15 @@ const TodosList = () => {
         }
     }
 
+    const handleTodoAction = (todo: Todo, action: 'edit' | 'delete') => {
+        if (action === 'edit') {
+            setEditingTodo(todo);
+            setIsDialogOpen(true);
+        } else if (action === 'delete') {
+            deleteTodo(todo.id);
+        }
+    };
+
     const errorDisplay =
         error
             ? ('status' in error
@@ -72,7 +83,12 @@ const TodosList = () => {
         <div className="todos-list">
             <div className='todos-list-items'>
                 {todos.map((todo) => (
-                    <TodoItem key={todo.id} {...todo} onToggleCompleted={(completed) => handleToggleCompleted(todo.id, completed)} />
+                    <TodoItem
+                        key={todo.id}
+                        {...todo}
+                        onToggleCompleted={(completed) => handleToggleCompleted(todo.id, completed)}
+                        onAction={(action) => handleTodoAction(todo, action)}
+                    />
                 ))}
             </div>
             <div className='todos-list-footer'>
@@ -80,6 +96,7 @@ const TodosList = () => {
             </div>
 
             <TodoDialog
+                todo={editingTodo}
                 isOpen={isDialogOpen}
                 onClose={() => { handleToggleDialog(false) }}
                 onSave={(todo) => { handleSaveTodo(todo) }}

@@ -1,6 +1,5 @@
 import Router from 'express-promise-router';
 import db from '../db/index.js';
-import { v4 as uuidv4 } from 'uuid';
 
 const router = new Router();
 
@@ -26,10 +25,9 @@ router.post('/', async (req, res) => {
     if (!title || !description) {
         return res.status(400).json({ error: 'Title and description are required' });
     }
-    const id = uuidv4();
     const { rows } = await db.query(
-        'INSERT INTO todos (id, title, description) VALUES ($1, $2, $3) RETURNING *',
-        [id, title, description]
+        'INSERT INTO todos (title, description) VALUES ($1, $2) RETURNING *',
+        [title, description]
     );
     res.status(201).json(rows[0]);
 });

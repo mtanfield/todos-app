@@ -1,12 +1,18 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import { config as dotenvConfig } from 'dotenv'
-import { resolve } from 'path'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-// Load .env from parent directory
-dotenvConfig({ path: resolve(__dirname, '../.env') })
-
-// https://vite.dev/config/
 export default defineConfig({
+  base: "/",
   plugins: [react()],
-})
+  preview: {
+    port: 8080,
+    strictPort: true,
+  },
+  server: {
+    port: 8080,
+    host: true,
+    cors: {
+      origin: 'http://localhost:7778', // Replace with your backend's origin
+    },
+  },
+});

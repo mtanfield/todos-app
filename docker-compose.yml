@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: todos_db # The database to create
+      POSTGRES_USER: user # The database user
+      POSTGRES_PASSWORD: password # The database password
+    volumes:
+      - db_data:/var/lib/postgresql/data # Volume for persistent data
+      - ./backend/db/initdb/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount the init script
+    ports:
+      - "5432:5432" # Map port 5432 on host to container
+
+  backend:
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    ports:
+      - "7778:7778"
+    environment:
+      # Use the Docker service name 'db' for the database host
+      - DB_USER=user
+      - DB_HOST=db
+      - DB_NAME=todos_db
+      - DB_PASSWORD=password
+      - DB_PORT=5432
+      - PORT=7778
+      - DATABASE_URL=postgres://user:password@db:5432/todos_db
+      - API_BASE_URL=http://localhost:7778
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+
+volumes:
+  db_data: {}

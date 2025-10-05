@@ -12,19 +12,24 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: todo-app-db
+  labels:
+    app: todo-app
+    tier: db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: todo-app
+      tier: db
   template:
     metadata:
       labels:
-        app: postgres
+        app: todo-app
+        tier: db
     spec:
       containers:
-        - name: postgres
+        - name: db
           image: postgres:16
           ports:
             - containerPort: 5432
@@ -72,7 +77,10 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres
+  name: db
+  labels:
+    app: todo-app
+    tier: db
 spec:
   selector:
     app: todo-app

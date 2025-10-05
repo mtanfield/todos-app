@@ -4,14 +4,13 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 COPY . .
-ENV VITE_API_BASE_URL=http://localhost:7778
 RUN npm run build
 
 FROM nginx:alpine AS final-stage
 
 COPY --from=build-stage /dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

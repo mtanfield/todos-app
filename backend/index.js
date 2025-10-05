@@ -6,7 +6,6 @@ import mountRoutes from './routes/index.js';
 dotenv.config({ path: '../.env' });
 
 const port = process.env.PORT || 3001;
-const API_URL = process.env.API_BASE_URL || 'http://localhost:3001';
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -26,4 +25,4 @@ app.use((_, res, next) => {
 
 mountRoutes(app);
 
-app.listen(port, () => console.log(`Server listening at ${API_URL}, port ${port}`));
+app.listen(port, () => console.log(`Server listening on port ${port}`));

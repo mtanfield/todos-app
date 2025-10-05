@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
-
 export type Todo = {
     id?: string;
     title: string;
@@ -11,20 +9,20 @@ export type Todo = {
 
 export const todosApi = createApi({
     reducerPath: 'todosApi',
-    baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+    baseQuery: fetchBaseQuery({ baseUrl: "/api/todos" }),
     tagTypes: ['Todos'],
     endpoints: (builder) => ({
         fetchTodos: builder.query<Todo[], void>({
-            query: () => '/api/todos/',
+            query: () => '',
             providesTags: ['Todos'],
         }),
         fetchTodo: builder.query<Todo, string>({
-            query: (id) => `/api/todos/${id}`,
+            query: (id) => `/${id}`,
             providesTags: ['Todos'],
         }),
         createTodo: builder.mutation({
             query: (newTodo) => ({
-                url: '/api/todos/',
+                url: '',
                 method: 'POST',
                 body: newTodo,
             }),
@@ -32,7 +30,7 @@ export const todosApi = createApi({
         }),
         updateTodo: builder.mutation({
             query: (updatedTodo) => ({
-                url: `/api/todos/${updatedTodo.id}`,
+                url: `/${updatedTodo.id}`,
                 method: 'PUT',
                 body: updatedTodo,
             }),
@@ -40,7 +38,7 @@ export const todosApi = createApi({
         }),
         deleteTodo: builder.mutation({
             query: (id) => ({
-                url: `/api/todos/${id}`,
+                url: `/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Todos'],

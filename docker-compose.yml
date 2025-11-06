@@ -3,14 +3,14 @@ services:
     container_name: todo-app-db
     image: postgres:16
     environment:
-      POSTGRES_DB: todos_db # The database to create
-      POSTGRES_USER: user # The database user
-      POSTGRES_PASSWORD: password # The database password
+      POSTGRES_DB: todos_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
     volumes:
       - db_data:/var/lib/postgresql/data # Volume for persistent data
       - ./db/initdb/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount the init script
     ports:
-      - "5432:5432" # Map port 5432 on host to container
+      - "5432:5432"
 
   backend:
     container_name: todo-app-backend
@@ -33,7 +33,7 @@ services:
   frontend:
     container_name: todo-app-frontend
     build:
-      context: ./frontend/
+      context: ./frontend/react-vite
       dockerfile: Dockerfile
     ports:
       - "80:80"

@@ -1,10 +1,10 @@
 # Node.js dependencies
 backend/node_modules/
-frontend/node_modules/
+frontend/react-vite/node_modules/
 
 # Build output
-frontend/dist/
 backend/dist/
+frontend/react-vite/dist/
 
 # Logs
 *.log

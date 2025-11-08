@@ -15,13 +15,16 @@ export class TodosList implements OnInit {
   todos: Todo[] = [];
 
   ngOnInit(): void {
+    this.getAllTodos();
+  }
+
+  getAllTodos(): void {
     this.todosService.getTodos().subscribe({
       next: (todos) => {
         this.todos = todos;
-        console.log(`Got todos: ${JSON.stringify(todos, null, 2)}`);
       },
       error: (error) => {
-        console.log(`An error occurred when attempting to fetch todos: ${error}`);
+        console.error(`An error occurred when attempting to fetch todos: ${error}`);
       }
     })
   }
@@ -33,12 +36,20 @@ export class TodosList implements OnInit {
   handleToggleCompleted(id?: string, completed?: boolean): void {
       if (!id || completed === undefined) return;
 
-      console.log(`Toggling completed of todo ${id} to ${completed}`);
-
-      // const todo = todos.find(t => t.id === id);
-      // if (todo) {
-      //     updateTodo({ ...todo, completed });
-      // }
+      const todoIndex = this.todos.findIndex(t => t.id === id);
+      if (todoIndex >= 0) {
+        this.todosService.updateTodo(id, {
+          ...this.todos[todoIndex],
+          completed: completed
+        }).subscribe({
+          next: (todo) => {
+            this.todos.splice(todoIndex, 1, todo);
+          },
+          error: (error) => {
+            console.error(`An error occurred when attempting to update todo at ${todoIndex}: ${error}`);
+          }
+        });
+      }
   }
 
   handleAction(todo: any, action: 'edit' | 'delete'): void {

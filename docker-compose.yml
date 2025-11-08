@@ -30,15 +30,17 @@ services:
     depends_on:
       - db
 
-  frontend:
-    container_name: todo-app-frontend
+  frontend-react-vite:
+    container_name: todo-app-frontend-react-vite
     build:
       context: ./frontend/react-vite
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "8080:80"
     depends_on:
       - backend
+    volumes:
+      - ./frontend/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
 
 volumes:
   db_data: {}

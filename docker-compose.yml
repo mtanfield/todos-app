@@ -12,10 +12,10 @@ services:
     ports:
       - "5432:5432"
 
-  backend:
-    container_name: todo-app-backend
+  backend-express:
+    container_name: todo-app-backend-express
     build:
-      context: ./backend/
+      context: ./backend/express/
       dockerfile: Dockerfile
     ports:
       - "7778:7778"
@@ -38,9 +38,9 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - backend
+      - backend-express
     volumes:
-      - ./frontend/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx-express.conf:/etc/nginx/conf.d/default.conf
 
   frontend-angular:
     container_name: todo-app-frontend-angular
@@ -50,9 +50,9 @@ services:
     ports:
       - "8081:80"
     depends_on:
-      - backend
+      - backend-express
     volumes:
-      - ./frontend/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx-express.conf:/etc/nginx/conf.d/default.conf
 
 volumes:
   db_data: {}

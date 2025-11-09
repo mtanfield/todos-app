@@ -1,6 +1,6 @@
 services:
-  db:
-    container_name: todo-app-db
+  db-postgres:
+    container_name: todo-app-db-postgres
     image: postgres:16
     environment:
       POSTGRES_DB: todos_db
@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - db_data:/var/lib/postgresql/data # Volume for persistent data
-      - ./db/initdb/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount the init script
+      - ./db/postgres/initdb/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount the init script
     ports:
       - "5432:5432"
 
@@ -21,14 +21,14 @@ services:
       - "7778:7778"
     environment:
       - DB_USER=user
-      - DB_HOST=db
+      - DB_HOST=db-postgres
       - DB_NAME=todos_db
       - DB_PASSWORD=password
       - DB_PORT=5432
       - PORT=7778
-      - DATABASE_URL=postgres://user:password@db:5432/todos_db
+      - DATABASE_URL=postgres://user:password@db-postgres:5432/todos_db
     depends_on:
-      - db
+      - db-postgres
 
   frontend-react-vite:
     container_name: todo-app-frontend-react-vite

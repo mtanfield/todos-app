@@ -1,0 +1,13 @@
+<div class="todo-dialog">
+    <div class="todo-dialog-backdrop" (click)="onClose()"></div>
+    <div class="todo-dialog-content">
+        <div class="todo-dialog-header">
+            <h2 class="todo-dialog-title">{{ todo != undefined ? 'Edit' : 'Add' }} Todo</h2>
+        </div>
+        <form class="todo-dialog-form" [formGroup]="todoForm" (ngSubmit)="handleSave()">
+            <input id="title" type="text" class="todo-dialog-input" placeholder="Title" formControlName="title">
+            <textarea id="description" class="todo-dialog-textarea" placeholder="Description" formControlName="description"></textarea>
+            <button type="submit" class="todo-dialog-submit" [disabled]="todoForm.invalid">{{ todo != undefined ? 'Save Changes' : 'Add Todo' }}</button>
+        </form>
+    </div>
+</div>

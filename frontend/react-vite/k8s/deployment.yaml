@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app-frontend
+  name: todo-app-frontend-react-vite
 spec:
   replicas: 3
   selector:
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: mtanfield/to-do-app-frontend:latest
+          image: mtanfield/to-do-app-frontend-react-vite:latest
           ports:
             - containerPort: 80
           resources:

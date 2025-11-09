@@ -1,0 +1,17 @@
+<div class="todo-item-cell todo-item-checkbox">
+    <input
+        type="checkbox"
+        [(ngModel)]=todo().completed
+        (ngModelChange)="onCompletedChanged($event)"
+    />
+</div>
+<div class="todo-item-cell todo-item-title" [ngClass]="{'completed': todo().completed}">{{ todo().title }}</div>
+<div class="todo-item-cell todo-item-description" [ngClass]="{'completed': todo().completed}">{{ todo().description }}</div>
+<div class="todo-item-cell todo-item-actions">
+    <button class="todo-item-button" title="Edit" (click)="onAction('edit')">
+        <mat-icon aria-hidden="false" aria-label="Edit" fontIcon="edit"></mat-icon>
+    </button>
+    <button class="todo-item-button" title="Delete" (click)="onAction('delete')">
+        <mat-icon aria-hidden="false" aria-label="Delete" fontIcon="delete"></mat-icon>
+    </button>
+</div>

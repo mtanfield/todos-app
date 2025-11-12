@@ -56,10 +56,10 @@ todo-app/
 ├── backend/
 │   └── express/          # Express.js backend
 ├── db/
-|   └── postgres          # PostgreSQL database
+|   └── postgres/         # PostgreSQL database
 ├── nginx/
 │   └── express/          # Express NGINX configuration
-└── k8s/                 # Kubernetes configurations
+└── k8s/                  # Kubernetes configurations
 ```
 
 ## Features

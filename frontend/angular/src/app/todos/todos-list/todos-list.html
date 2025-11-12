@@ -1,0 +1,12 @@
+<div class="todos-list">
+    <table class='todos-list-items'>
+        @for (todo of todos; track todo.id) {
+        <app-todo-item class="todo-item" [ngClass]="{completed: todo.completed}" [todo]="todo"
+            (onToggleCompleted)="handleToggleCompleted(todo.id, $event)"
+            (onExecuteAction)="handleAction(todo, $event)"></app-todo-item>
+        }
+    </table>
+    <div class='todos-list-footer'>
+        <button class='todos-list-add-button' (click)="handleAddTodo()">Add Todo</button>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+# The Deployment for the React frontend Pod
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-frontend-react-vite
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: todo-app
+        tier: frontend
+    spec:
+      containers:
+        - name: frontend-react-vite
+          image: mtanfield/to-do-app-frontend-react-vite:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+---
+# A Service to expose the frontend to the internet
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-react-vite
+  labels:
+    app: todo-app
+    tier: frontend
+spec:
+  selector:
+    app: todo-app
+    tier: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP

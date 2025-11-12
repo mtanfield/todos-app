@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-app-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "localhost"
+      http:
+        paths:
+          - path: /react
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-react-vite
+                port:
+                  number: 80
+          - path: /angular
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-angular
+                port:
+                  number: 80
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-express
+                port:
+                  number: 7778

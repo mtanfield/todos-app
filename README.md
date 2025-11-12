@@ -58,7 +58,7 @@ todo-app/
 ├── db/
 |   └── postgres          # PostgreSQL database
 ├── nginx/
-│   └── nginx.conf       # Shared NGINX configuration
+│   └── express/          # Express NGINX configuration
 └── k8s/                 # Kubernetes configurations
 ```
 

@@ -26,7 +26,7 @@ export class TodosList implements OnInit {
         this.todos = todos;
       },
       error: (error) => {
-        console.error(`An error occurred when attempting to fetch todos: ${error}`);
+        console.error("An error occurred when attempting to fetch todos: ", error);
       }
     })
   }
@@ -48,7 +48,7 @@ export class TodosList implements OnInit {
           this.todos.splice(todoIndex, 1, todo);
         },
         error: (error) => {
-          console.error(`An error occurred when attempting to update todo: ${error}`);
+          console.error("An error occurred when attempting to update todo: ", error);
         }
       });
     }
@@ -63,7 +63,7 @@ export class TodosList implements OnInit {
           this.getAllTodos();
         },
         error: (error) => {
-          console.error(`An error occurred when attempting to delete todo: ${error}`);
+          console.error("An error occurred when attempting to delete todo: ", error);
         }
       });
     }
@@ -83,7 +83,7 @@ export class TodosList implements OnInit {
             this.getAllTodos();
           },
           error: (error) => {
-            console.error(`An error occurred when attempting to update todo: ${error}`);
+            console.error("An error occurred when attempting to update todo: ", error);
           }
         });
       } else if (newTodo != undefined) {
@@ -92,7 +92,7 @@ export class TodosList implements OnInit {
             this.getAllTodos();
           },
           error: (error) => {
-            console.error(`An error occurred when attempting to create todo: ${error}`);
+            console.error("An error occurred when attempting to create todo: ", error);
           }
         });
       }

@@ -1,11 +1,11 @@
-FROM node:20-alpine AS build-stage
-
-COPY package.json package-lock.json ./
-
+# Stage 1: Build React application
+FROM node:lts-alpine AS build-react
+WORKDIR /app
+COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-FROM nginx:alpine AS final-stage
-
-COPY --from=build-stage /dist /usr/share/nginx/html
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+COPY --from=build-react /app/dist /usr/share/nginx/html/react

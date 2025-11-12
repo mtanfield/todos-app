@@ -8,7 +8,7 @@ import { Todo } from './todo.interface';
 })
 export class TodosService {
   constructor(private http: HttpClient) { }
-  private apiUrl = 'http://localhost:7778/api/todos';
+  private apiUrl = '/api/todos';
 
   getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(`${this.apiUrl}`);

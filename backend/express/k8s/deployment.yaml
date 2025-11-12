@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app-backend
+  name: todo-app-backend-express
 spec:
   replicas: 1
   selector:
@@ -16,14 +16,14 @@ spec:
     spec:
       containers:
         - name: backend
-          image: mtanfield/to-do-app-backend:latest
+          image: mtanfield/to-do-app-backend-express:latest
           ports:
             - containerPort: 7778
           env:
             - name: DB_USER
               value: "user"
             - name: DB_HOST
-              value: "db"
+              value: "db-postgres"
             - name: DB_NAME
               value: "todos_db"
             - name: DB_PASSWORD
@@ -33,7 +33,7 @@ spec:
             - name: PORT
               value: "7778"
             - name: DATABASE_URL
-              value: "postgres://user:password@postgres:5432/todos_db"
+              value: "postgres://user:password@db-postgres:5432/todos_db"
           resources:
             requests:
               memory: "128Mi"
@@ -45,7 +45,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: backend-express
 spec:
   selector:
     app: todo-app

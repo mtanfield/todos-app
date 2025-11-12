@@ -1,8 +1,8 @@
-# The Deployment for the React frontend Pod
+# The Deployment for the Angular frontend Pod
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-app-frontend-react-vite
+  name: todo-app-frontend-angular
 spec:
   replicas: 1
   selector:
@@ -16,8 +16,8 @@ spec:
         tier: frontend
     spec:
       containers:
-        - name: frontend-react-vite
-          image: mtanfield/to-do-app-frontend-react-vite:latest
+        - name: frontend-angular
+          image: mtanfield/to-do-app-frontend-angular:latest
           ports:
             - containerPort: 80
           resources:
@@ -32,7 +32,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-react-vite
+  name: frontend-angular
   labels:
     app: todo-app
     tier: frontend

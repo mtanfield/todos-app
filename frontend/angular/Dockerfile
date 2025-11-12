@@ -1,13 +1,10 @@
-FROM node:20-alpine AS build-stage
-
+FROM node:lts-alpine AS build-angular
 WORKDIR /app
-
-COPY package*.json ./
-
+COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-FROM nginx:alpine AS final-stage
-
-COPY --from=build-stage /app/dist/angular/browser /usr/share/nginx/html
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+COPY --from=build-angular /app/dist/angular/browser /usr/share/nginx/html/angular

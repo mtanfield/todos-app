@@ -4,6 +4,12 @@
 
 # Build outputs
 **/dist/
+# Dependencies
+**/node_modules/
+**/package-lock.json
+
+# Build outputs
+**/dist/
 **/build/
 
 # Vite specific
@@ -40,10 +46,6 @@
 
 # IDE - VSCode
 **/.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
 *.code-workspace
 
 # IDE - JetBrains
@@ -68,3 +70,18 @@ Thumbs.db
 **/.Trashes
 **/ehthumbs.db
 **/Desktop.ini
+
+# Java / Maven
+**/target/
+**/.mvn/
+**/.mvn/wrapper/maven-wrapper.jar
+**/*.class
+**/out/
+
+# Angular / frontend extras
+**/out-tsc/
+**/.angular/cache/
+**/bazel-out/
+**/__screenshots__/
+**/.history/
+**/tmp/

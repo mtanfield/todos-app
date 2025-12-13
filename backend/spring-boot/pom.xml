@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tanfield.todo</groupId>
-	<artifactId>todo-backend</artifactId>
+	<artifactId>todo-backend-spring-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>todo-backend</name>
+	<name>todo-backend-spring-boot</name>
 	<description>Todo App - Backend (Spring Boot)</description>
 	<url/>
 	<licenses>
@@ -70,11 +70,15 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version> <!-- Use a compatible version -->
+                    <version>3.11.0</version>
                     <configuration>
                         <release>21</release>
                     </configuration>
                 </plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
 		</plugins>
 	</build>
 

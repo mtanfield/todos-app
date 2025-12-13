@@ -12,10 +12,10 @@ services:
     ports:
       - "5432:5432"
 
-  backend-express:
-    container_name: todo-app-backend-express
+  backend-spring-boot:
+    container_name: todo-app-backend-spring-boot
     build:
-      context: ./backend/express/
+      context: ./backend/spring-boot/
       dockerfile: Dockerfile
     ports:
       - "7778:7778"
@@ -29,6 +29,24 @@ services:
       - DATABASE_URL=postgres://user:password@db-postgres:5432/todos_db
     depends_on:
       - db-postgres
+
+  # backend-express:
+  #   container_name: todo-app-backend-express
+  #   build:
+  #     context: ./backend/express/
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "7778:7778"
+  #   environment:
+  #     - DB_USER=user
+  #     - DB_HOST=db-postgres
+  #     - DB_NAME=todos_db
+  #     - DB_PASSWORD=password
+  #     - DB_PORT=5432
+  #     - PORT=7778
+  #     - DATABASE_URL=postgres://user:password@db-postgres:5432/todos_db
+  #   depends_on:
+  #     - db-postgres
 
   frontend-react-vite:
     container_name: todo-app-frontend-react-vite
@@ -46,17 +64,31 @@ services:
     volumes:
       - angular_dist:/usr/share/nginx/html/angular
 
-  nginx-express:
-    container_name: todo-app-nginx-express
+  # nginx-express:
+  #   container_name: todo-app-nginx-express
+  #   image: nginx:stable-alpine
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./nginx/express/nginx.conf:/etc/nginx/conf.d/default.conf
+  #     - react_dist:/usr/share/nginx/html/react
+  #     - angular_dist:/usr/share/nginx/html/angular
+  #   depends_on:
+  #     - backend-express
+  #     - frontend-react-vite
+  #     - frontend-angular
+
+  nginx-spring-boot:
+    container_name: todo-app-nginx-spring-boot
     image: nginx:stable-alpine
     ports:
       - "80:80"
     volumes:
-      - ./nginx/express/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/spring-boot/nginx.conf:/etc/nginx/conf.d/default.conf
       - react_dist:/usr/share/nginx/html/react
       - angular_dist:/usr/share/nginx/html/angular
     depends_on:
-      - backend-express
+      - backend-spring-boot
       - frontend-react-vite
       - frontend-angular
 
